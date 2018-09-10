@@ -12,7 +12,7 @@ phone_head_url = 'https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=ut
 phone_tail_url = '&s=217&click=0'
 
 phoneid_head_url ='https://sclub.jd.com/comment/productPageComments.action?callback=fetchJSON_comment98vv8165&productId='
-phoneid_middile_url = '.&score=0&sortType=5&page='
+phoneid_middile_url = '&score=0&sortType=5&page='
 phoneid_tail_url ='&pageSize=10&isShadowSku=0&fold=1'
 
 
@@ -33,7 +33,7 @@ def getComment(url):
         soup = BeautifulSoup(re.text,'lxml')
         if re.status_code == 200:
             origin_data = re.text
-            data = origin_data.strip("fetchJSON_comment98vv29563(")
+            data = origin_data.strip("fetchJSON_comment98vv8165(")
             data = data.strip(");")
             json_data = json.loads(data,encoding ="utf - 8")
             comments = json_data["comments"]
@@ -58,7 +58,7 @@ for i in id:
         phoneid_url = phoneid_origin_url + str(index) + phoneid_tail_url
         comment = getComment(phoneid_url)
         comment = json.dumps(comment,ensure_ascii=False)
-        file = open('data.json','w')
+        file = open('data.json','w', encoding='utf-8')
         file.write(comment)
         file.close()
 
